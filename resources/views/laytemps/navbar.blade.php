@@ -10,9 +10,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="{{ route('about') }}">About</a></li>
-                <li><a href="{{ route('contact') }}">Contact</a></li>
+                <li class="{{ Request::is('home*') || Request::is('/') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
+                <li class="{{ Request::is('categories') || Request::is('category*') ? 'active' : '' }}"><a href="{{ route('categories') }}">Categories</a></li>
+                <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{ route('about') }}">About</a></li>
+                <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
 
             {{-- <ul class="nav navbar-nav navbar-right">

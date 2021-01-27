@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Default Route
+//User Route
 Route::get('/', 'LandingController@index');
+Route::get('/about', 'LandingController@about')->name('about');
+Route::get('/contact', 'LandingController@contact')->name('contact');
+Route::get('/categories', 'CategoriesController@index')->name('categories');
+Route::get('/category/{id}', 'CategoriesController@show')->name('category');
 
 Auth::routes();
 
-//Group Middleware
+//Group Middleware Admin
 Route::middleware(['admin'])->group(function() {
     Route::get('/home', 'AdminController@index')->name('home');
     Route::resource('objek_wisata', 'ObjekWisataController');
@@ -27,6 +31,3 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('info_objek', 'InfoObjekController');
     Route::resource('pengaturan', 'PengaturanController');
 });
-
-Route::get('/about', 'LandingController@about')->name('about');
-Route::get('/contact', 'LandingController@contact')->name('contact');

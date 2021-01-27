@@ -1,60 +1,54 @@
-@extends('layouts.app')
+@extends('layouts.front')
 
 @section('content')
     @include('laytemps.carousel')
     <section>
         <div class="row">
+            <!-- Artikel Post -->
             <div class="col-md-8">
-                <article class="blog-post">
-                    <div class="blog-post-image">
-                        <a href="post.html"><img src="asset/renda/images/750x500-1.jpg" alt=""></a>
-                    </div>
-                    <div class="blog-post-body">
-                        <h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-                        <div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
-                        <p>ew months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-                        <div class="read-more"><a href="#">Continue Reading</a></div>
-                    </div>
-                </article>
-                <!-- article -->
-                <article class="blog-post">
-                    <div class="blog-post-image">
-                        <a href="post.html"><img src="asset/renda/images/750x500-2.jpg" alt=""></a>
-                    </div>
-                    <div class="blog-post-body">
-                        <h2><a href="post.html">The Best Street Style Looks of London Fashion Week</a></h2>
-                        <div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
-                        <p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared.</p>
-                        <div class="read-more"><a href="#">Continue Reading</a></div>
-                    </div>
-                </article>
-                <!-- article -->
-                <article class="blog-post">
-                    <div class="blog-post-image">
-                        <a href="post.html"><img src="asset/renda/images/750x500-3.jpg" alt=""></a>
-                    </div>
-                    <div class="blog-post-body">
-                        <h2><a href="post.html">Front Row Style: Our Favorite A-List Moments of Fashion Week</a></h2>
-                        <div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
-                        <p>It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. Few months ago, we found ridiculously cheap plane tickets for Boston and off we went.</p>
-                        <div class="read-more"><a href="#">Continue Reading</a></div>
-                    </div>
-                </article>
+                @forelse ($wisata as $item)
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <a href="post.html"><img src="asset/images/lampiran/{{ $item->lamp_gambar }}" alt=""></a>
+                        </div>
+                        <div class="blog-post-body">
+                            <h2><a href="post.html">{{ $item->nama }} ({{ $item->nama_lain }})</a></h2>
+                            <div class="post-meta"><span><i class="fa fa-clock-o"></i>{{ date('d F Y', strtotime($item->created_at)) }}</span></div>
+                            <p>{{ $item->deskripsi }}</p>
+                            <div class="read-more"><a href="{{ route('category', $item->owid) }}">Continue Reading</a></div>
+                        </div>
+                    </article>
+                @empty
+                    <article>
+                        <div class="blog-post-image">
+                            <a href="post.html"><img src="asset/renda/images/750x500-1.jpg" alt=""></a>
+                        </div>
+                        <div class="blog-post-body">
+                            <h3 class="text-center">Maaf Wisata Tidak Tersedia</h3>
+                        </div>
+                    </article>
+
+                @endforelse
+
             </div>
+            <!-- End Artikel Post -->
+
+            <!-- Sidebar -->
             <div class="col-md-4 sidebar-gutter">
                 <aside>
                 <!-- sidebar-widget -->
-                <div class="sidebar-widget">
+                <!-- About Me -->
+                {{-- <div class="sidebar-widget">
                     <h3 class="sidebar-title">About Me</h3>
                     <div class="widget-container widget-about">
-                        <a href="post.html"><img src="asset/renda/images/author.jpg" alt=""></a>
-                        <h4>Jamie Mooz</h4>
-                        <div class="author-title">Designer</div>
-                        <p>While everyone’s eyes are glued to the runway, it’s hard to ignore that there are major fashion moments on the front row too.</p>
+                        <a href="post.html"><img src="asset/images/F1.jpg" alt=""></a>
+                        <h4>Muhammad Yusuf Haryadi</h4>
+                        <div class="author-title">Back-End Developer</div>
+                        <p>Setiap orang memiliki massa nya dimana ia paham atau ia bisa mengerti, tapi waktulah yang dapat menjawab itu semua.</p>
                     </div>
-                </div>
+                </div> --}}
                 <!-- sidebar-widget -->
-                <div class="sidebar-widget">
+                {{-- <div class="sidebar-widget">
                     <h3 class="sidebar-title">Featured Posts</h3>
                     <div class="widget-container">
                         <article class="widget-post">
@@ -113,9 +107,9 @@
                             </div>
                         </article>
                     </div>
-                </div>
+                </div> --}}
                 <!-- sidebar-widget -->
-                <div class="sidebar-widget">
+                {{-- <div class="sidebar-widget">
                     <h3 class="sidebar-title">Socials</h3>
                     <div class="widget-container">
                         <div class="widget-socials">
@@ -127,25 +121,13 @@
                             <a href="#"><i class="fa fa-reddit"></i></a>
                         </div>
                     </div>
-                </div>
-                <!-- sidebar-widget -->
-                <div class="sidebar-widget">
-                    <h3 class="sidebar-title">Categories</h3>
-                    <div class="widget-container">
-                        <ul>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Art</a></li>
-                            <li><a href="#">Design</a></li>
-                            <li><a href="#">Featured</a></li>
-                            <li><a href="#">Graphics</a></li>
-                            <li><a href="#">Peoples</a></li>
-                            <li><a href="#">Uncategorized</a></li>
-                        </ul>
-                    </div>
-                </div>
+                </div> --}}
+                <!-- sidebar-widget categories -->
+                    @include('laytemps.categories')
                 </div>
                 </aside>
             </div>
+            <!-- End Sidebar -->
         </div>
     </section>
 @endsection
